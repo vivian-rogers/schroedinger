@@ -1,10 +1,10 @@
 #!/bin/bash
 
-rm ./results/*.tx*
+mkdir results
 rm ./results/slice*.png
 rm ./results/test.mp4
 
-python3 perturb.py
+python3 hamiltonian.py
 
 #bash plotslice.sh
 bash ./render.sh 24

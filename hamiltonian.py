@@ -107,15 +107,14 @@ def plotSlice(wfc,filename):
     plt.cla()
 
 
-Emin = (1+1+1)/(2*m_e*widthbohr**2) 
-print("Predicted: " + str(Emin / eV))
+
+print("Starting with grid size: " + str(w) + " (bohr radii), grid divisions: " + str(s))
 wfc = np.random.rand(s,s,s) 
 #wfc = np.ones((s,s,s))
-#print("initial norm: "+ str(measure(wfc)))
 wfc = wfc * 1/measure(wfc) 
-#print("norm: "+ str(measure(wfc)))
 
-#wfc2 = wfc.copy()
+
+#run through first loop
 E2 = -10 ** (-40)
 rat = 100
 i = 0
@@ -123,9 +122,9 @@ i = 0
 while (abs(rat) > 10**(-15)):
     filename = "slice" + str(i) + ".png"
     wfc2 = hamiltonian(wfc)
-    E = innerProd(wfc,wfc2)
+    E = innerProd(wfc,wfc2) # performs <wfc|H|wfc>
     wfc2 = wfc2 * 1/measure(wfc2)
-    print("eigenval = " + str(E))
+    print("Energy = " + str(E)) # still figuring out the units
     rat = 100 * (E - E2)/ E2
     E2 = E
     print("ratio = " + str(rat))
@@ -136,13 +135,3 @@ while (abs(rat) > 10**(-15)):
     plotSlice(wfc, filename)
     i += 1
     #print("<wfc3|wfc3> = " + str(innerProd(wfc,wfc)))
-
-
-
-
-
-
-
-#for i in space:
-#    for j in space:
-#        for k in space: 
